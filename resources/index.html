@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+  </head>
+  <body>
+    <form action="/api/productos" method="POST">
+      <div>
+        <label for="title">Titulo del producto</label>
+        <input name="title" id="title" value="Producto desde form" />
+      </div>
+      <div>
+        <label for="price">Precio</label>
+        <input name="price" id="price" type="number" />
+      </div>
+      <div>
+        <label for="thumbnail">Thumbnail</label>
+        <input
+          name="thumbnail"
+          id="thumbnail"
+          type="url"
+          value="http://thumbnail.com/img.gif"
+        />
+      </div>
+      <div>
+        <button type="submit">Send</button>
+      </div>
+    </form>
+  </body>
+</html>
