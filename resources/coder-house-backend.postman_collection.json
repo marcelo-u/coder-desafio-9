@@ -14,11 +14,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3333/public/index.html",
+							"raw": "localhost:8080/public/index.html",
 							"host": [
 								"localhost"
 							],
-							"port": "3333",
+							"port": "8080",
 							"path": [
 								"public",
 								"index.html"
@@ -33,11 +33,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3333/api/productos",
+							"raw": "localhost:8080/api/productos",
 							"host": [
 								"localhost"
 							],
-							"port": "3333",
+							"port": "8080",
 							"path": [
 								"api",
 								"productos"
@@ -52,11 +52,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3333/api/productos/2",
+							"raw": "localhost:8080/api/productos/2",
 							"host": [
 								"localhost"
 							],
-							"port": "3333",
+							"port": "8080",
 							"path": [
 								"api",
 								"productos",
@@ -81,15 +81,15 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3333/api/productos/6",
+							"raw": "localhost:8080/api/productos/2",
 							"host": [
 								"localhost"
 							],
-							"port": "3333",
+							"port": "8080",
 							"path": [
 								"api",
 								"productos",
-								"6"
+								"2"
 							]
 						}
 					},
@@ -101,15 +101,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3333/api/productos/7",
+							"raw": "localhost:8080/api/productos/2",
 							"host": [
 								"localhost"
 							],
-							"port": "3333",
+							"port": "8080",
 							"path": [
 								"api",
 								"productos",
-								"7"
+								"2"
 							]
 						}
 					},
@@ -141,11 +141,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3333/api/productos",
+							"raw": "localhost:8080/api/productos",
 							"host": [
 								"localhost"
 							],
-							"port": "3333",
+							"port": "8080",
 							"path": [
 								"api",
 								"productos"
