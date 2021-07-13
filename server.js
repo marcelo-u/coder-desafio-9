@@ -12,7 +12,6 @@ const NO_PRODUCT_FOUND = {
 const NO_PRODUCTS_FOUND = {
   error: "no hay productos cargados",
 };
-
 //mw para validar que los 3 campos del producto no sean falsies
 const productSchemaCheckerMiddleware = (req, res, next) => {
   if (producto.schemaValidator(req.body)) {
@@ -21,10 +20,8 @@ const productSchemaCheckerMiddleware = (req, res, next) => {
     res.status(400).send(`Wrong format: ${JSON.stringify(req.body)}`);
   }
 };
-
 //mw para validar que el producto buscado esté presente
 const isProductPresentMiddleware = (req, res, next) => {
-  //listo
   const index = producto.getProductIndexById(req.params.id);
   if (index === -1) {
     res.status(404).send(NO_PRODUCT_FOUND);
@@ -33,29 +30,23 @@ const isProductPresentMiddleware = (req, res, next) => {
     next();
   }
 };
-
 app.use(express.json());
 app.use(express.urlencoded());
 //metodod que devuelve el array de productos
 router.get("/productos", (req, res) => {
-  //listo
   const prods = producto.listarProductos();
   prods.length > 0 ? res.send(prods) : res.status(404).send(NO_PRODUCTS_FOUND);
 });
 //metodo que devuelve el producto de un id dado
 router.get("/productos/:id", isProductPresentMiddleware, (req, res) => {
-  //listo
   const prod = producto.buscarProducto(req.index);
   res.send(prod);
 });
 //metodo que postea un nuevo producto
-
 router.post("/productos", productSchemaCheckerMiddleware, (req, res) => {
-  //listo
   const prod = producto.agregarProducto(req.body);
   res.send(prod);
 });
-
 //metodo para pisar un producto de un id dado
 router.put(
   "/productos/:id",
