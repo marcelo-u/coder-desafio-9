@@ -4,10 +4,6 @@ const router = express.Router();
 const PORT = 8080;
 const app = express();
 
-//funciona como indice
-let counter = 0;
-const productos = [];
-
 //objeto con el mensaje de error para producto no encontrado
 const NO_PRODUCT_FOUND = {
   error: "producto no encontrado",
