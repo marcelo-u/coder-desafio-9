@@ -1,3 +1,4 @@
+const producto = require("./modulos/producto");
 const express = require("express");
 const bodyParser = require("body-parser");
 const router = express.Router();
@@ -19,16 +20,17 @@ const NO_PRODUCTS_FOUND = {
 
 //mw para validar que los 3 campos del producto no sean falsies
 const productSchemaCheckerMiddleware = (req, res, next) => {
-  const producto = req.body;
-  //agrego una validación sencilla que me avise si alguno de los 3 campos no está definido
-  if (!producto.title || !producto.price || !producto.thumbnail) {
+  if (producto.schemaValidator(req.body)) {
+    next();
+  } else {
     res.status(400).send(`Wrong format: ${JSON.stringify(req.body)}`);
-  } else next();
+  }
 };
 
 //mw para validar que el producto buscado esté presente
 const isProductPresentMiddleware = (req, res, next) => {
-  const index = productos.findIndex((producto) => producto.id == req.params.id);
+  //listo
+  const index = producto.getProductIndexById(req.params.id);
   if (index === -1) {
     res.status(404).send(NO_PRODUCT_FOUND);
   } else {
@@ -41,40 +43,43 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 //metodod que devuelve el array de productos
 router.get("/productos", (req, res) => {
-  productos.length > 0
-    ? res.send(productos)
-    : res.status(404).send(NO_PRODUCTS_FOUND);
+  //listo
+  const prods = producto.listarProductos();
+  prods.length > 0 ? res.send(prods) : res.status(404).send(NO_PRODUCTS_FOUND);
 });
 //metodo que devuelve el producto de un id dado
 router.get("/productos/:id", isProductPresentMiddleware, (req, res) => {
-  const producto = productos[req.index];
-  res.send(producto);
+  //listo
+  const prod = producto.buscarProducto(req.index);
+  res.send(prod);
 });
 //metodo que postea un nuevo producto
+
 router.post("/productos", productSchemaCheckerMiddleware, (req, res) => {
-  const producto = req.body;
-  producto.price = Number(producto.price);
-  producto.id = ++counter;
-  productos.push(producto);
-  res.send(producto);
+  //listo
+  const prod = producto.agregarProducto(req.body);
+  res.send(prod);
 });
+
 //metodo para pisar un producto de un id dado
 router.put(
   "/productos/:id",
   productSchemaCheckerMiddleware,
   isProductPresentMiddleware,
   (req, res) => {
-    const producto = req.body;
-    producto.id = Number(req.params.id);
-    productos[req.index] = producto;
-    res.send(producto);
+    const prod = {};
+    prod.id = Number(req.params.id);
+    prod.title = req.body.title;
+    prod.price = req.body.price;
+    prod.thumbnail = req.body.thumbnail;
+    const updatedProd = producto.actualizarProducto(req.index, prod);
+    res.send(updatedProd);
   }
 );
 //metodo para borrar un producto de un id dado
 router.delete("/productos/:id", isProductPresentMiddleware, (req, res) => {
-  const producto = productos[req.index];
-  productos.splice(req.index, 1);
-  res.send(producto);
+  const prod = producto.borrarProducto(req.index);
+  res.send(prod);
 });
 //agrego el alias public
 app.use("/public", express.static("resources"));
