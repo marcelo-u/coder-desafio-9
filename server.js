@@ -1,6 +1,5 @@
 const producto = require("./modulos/producto");
 const express = require("express");
-const bodyParser = require("body-parser");
 const router = express.Router();
 const PORT = 8080;
 const app = express();
@@ -39,8 +38,8 @@ const isProductPresentMiddleware = (req, res, next) => {
   }
 };
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(express.json());
+app.use(express.urlencoded());
 //metodod que devuelve el array de productos
 router.get("/productos", (req, res) => {
   //listo
